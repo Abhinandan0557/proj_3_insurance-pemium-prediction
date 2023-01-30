@@ -29,7 +29,7 @@ def get_collection_as_dataframe(database_name:str,collection_name:str)->pd.DataF
     except Exception as e:
         raise InsuranceException(e, sys)
 
-'''
+
 def write_yaml_file(file_path,data:dict):
     try:
         file_dir = os.path.dirname(file_path)
@@ -48,7 +48,7 @@ def convert_columns_float(df:pd.DataFrame,exclude_columns:list)->pd.DataFrame:
         return df
     except Exception as e:
         raise e
-
+'''
 def save_object(file_path: str, obj: object) -> None:
     try:
         os.makedirs(os.path.dirname(file_path), exist_ok=True)

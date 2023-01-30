@@ -15,9 +15,10 @@ class DataIngestion:
 
     #Here we divide our data into train,test and validation data
     
-    def __init__(self,data_ingestion_config:config_entity.DataIngestionConfig ):
+    def __init__(self,data_ingestion_config:config_entity.DataIngestionConfig):
         try:
             self.data_ingestion_config = data_ingestion_config
+            #self.data_ingestion_artifact = data_ingestion_artifact
         except Exception as e:
             raise InsuranceException(e, sys)
 
@@ -59,13 +60,12 @@ class DataIngestion:
             test_df.to_csv(path_or_buf=self.data_ingestion_config.test_file_path,index=False,header=True)
             
             #Prepare artifact folder
-            data_ingestion_artifact = artifact_entity.DataIngestionArtifact(
-                feature_store_file_path=self.data_ingestion_config.feature_store_file_path,
-                train_file_path=self.data_ingestion_config.train_file_path, 
-                test_file_path=self.data_ingestion_config.test_file_path)
+            data_ingestion_artifact = artifact_entity.DataIngestionArtifact(feature_store_file_path=self.data_ingestion_config.feature_store_file_path,
+                            train_file_path=self.data_ingestion_config.train_file_path,
+                            test_file_path=self.data_ingestion_config.test_file_path)
 
-            #logging.info(f"Data ingestion artifact: {data_ingestion_artifact}")
-            #return data_ingestion_artifact
+            logging.info(f"Data ingestion artifact: {data_ingestion_artifact}")
+            return data_ingestion_artifact
 
         except Exception as e:
             raise InsuranceException(error_message=e, error_detail=sys)

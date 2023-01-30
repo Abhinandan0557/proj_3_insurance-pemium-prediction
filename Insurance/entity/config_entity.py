@@ -49,7 +49,7 @@ class DataIngestionConfig:
         except Exception  as e:
             raise InsuranceException(e,sys)          
 
-''' 
+
 class DataValidationConfig:
     
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
@@ -59,7 +59,7 @@ class DataValidationConfig:
         self.base_file_path = os.path.join("insurance.csv")
 
 
-
+'''
 class DataTransformationConfig:
     
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
@@ -68,5 +68,4 @@ class DataTransformationConfig:
         self.transformed_train_path =  os.path.join(self.data_transformation_dir,"transformed",TRAIN_FILE_NAME.replace("csv","npz"))
         self.transformed_test_path =os.path.join(self.data_transformation_dir,"transformed",TEST_FILE_NAME.replace("csv","npz"))
         self.target_encoder_path = os.path.join(self.data_transformation_dir,"target_encoder",TARGET_ENCODER_OBJECT_FILE_NAME)
-
 '''
