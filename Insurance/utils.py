@@ -48,7 +48,9 @@ def convert_columns_float(df:pd.DataFrame,exclude_columns:list)->pd.DataFrame:
         return df
     except Exception as e:
         raise e
-'''
+
+
+#making funcion to save transformed data
 def save_object(file_path: str, obj: object) -> None:
     try:
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -57,7 +59,8 @@ def save_object(file_path: str, obj: object) -> None:
     except Exception as e:
         raise InsuranceException(e, sys) from e
 
-    
+
+#Making function to load object  
 def load_object(file_path: str, ) -> object:
     try:
         if not os.path.exists(file_path):
@@ -66,6 +69,7 @@ def load_object(file_path: str, ) -> object:
             return dill.load(file_obj)
     except Exception as e:
         raise InsuranceException(e, sys) from e
+
 
 def save_numpy_array_data(file_path: str, array: np.array):
 
@@ -76,5 +80,3 @@ def save_numpy_array_data(file_path: str, array: np.array):
             np.save(file_obj, array)
     except Exception as e:
         raise InsuranceException(e, sys) from e
-
-'''
