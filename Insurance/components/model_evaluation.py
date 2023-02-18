@@ -45,28 +45,26 @@ class ModelEvaluation:
 
                 return model_eval_artifact
 
-        except Exception as e:
-            raise InsuranceException(e, sys)
 
-'''
-            # Find location previous model
-            transfoer_path = self.model_resolver.get_latest_transformer_path()
+
+            #Finding location of previous model
+            transformer_path = self.model_resolver.get_latest_transformer_path()
             model_path = self.model_resolver.get_latest_model_path()
             traget_encoder_path = self.model_resolver.get_latest_target_encoder_path()
 
-            # Previosu model
-            transformer = load_object(file_path=transfoer_path)
+            #defining transformer, model & target_encoder for Previosu model
+            transformer = load_object(file_path=transformer_path)
             model = load_object(file_path=model_path)
             target_encoder = load_object(file_path=traget_encoder_path)
 
-            # New  model
+            #defining transformer, model & target_encoder for New  model
             current_transformer = load_object(file_path=self.data_transformation_artifact.transform_object_path)
             current_model = load_object(file_path=self.model_trainer_artifact.model_path)
             current_target_encoder = load_object(file_path=self.data_transformation_artifact.target_encoder_path)
 
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
             target_df = test_df[TARGET_COLUMN]
-            y_ture = target_df
+            y_true = target_df
 
 
             input_features_name = list(transformer.feature_names_in_)
@@ -80,10 +78,10 @@ class ModelEvaluation:
 
             # Comparision b/w new model and old model
 
-            previous_model_score = r2_score(y_true=y_ture, y_pred=y_pred)
+            previous_model_score = r2_score(y_true=y_true, y_pred=y_pred)
 
 
-            # Accuracy current model
+            # Accuracy of current model
 
             input_feature_name = list(current_transformer.feature_names_in_)
             input_arr = current_transformer.transform(test_df[input_feature_name])
@@ -101,9 +99,12 @@ class ModelEvaluation:
 
             model_eval_artifact = artifact_entity.ModelEvaluationArtifact(is_model_accepted =  True, 
             improved_accuracy=current_model_score - previous_model_score)
-
             return model_eval_artifact
 
-'''
+
+        except Exception as e:
+            raise InsuranceException(e, sys)
+
+
 # Cloud ( AWS -> s3 bucket)
 # Databse - > Model pusher
