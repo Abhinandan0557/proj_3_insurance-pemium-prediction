@@ -17,7 +17,7 @@ class TrainingPipelineConfig:
     
     def __init__(self):
         try:
-            #Here we are creting artifact folder to save training and testing data
+            #Here we are creating artifact folder to save training and testing data
             self.artifact_dir = os.path.join(os.getcwd(),"artifact",f"{datetime.now().strftime('%m%d%Y__%H%M%S')}")
         except Exception  as e:
             raise InsuranceException(e,sys)    
